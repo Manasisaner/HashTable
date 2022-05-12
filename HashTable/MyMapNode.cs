@@ -37,6 +37,22 @@ namespace HashTable
                 }
             }
             return default(V);
+         }
+                protected LinkedList<keyValue<K, V>> GetLinkedList(int position)//method and GetLinkedList having return type is Linkedlist keyvalue pair which is define line no13
+        {
+            //linkedlist contains a data type of keyvalue.
+            //position helps to findout the linkedlist in which key value pair will be inserted
+            //position is passed into array of items and stored in variable linkedlist with data type as defined below.
+            LinkedList<keyValue<K, V>> linkedList = items[position];
+        
+            if (linkedList == null)
+            {
+                linkedList = new LinkedList<keyValue<K, V>>();
+                //adding a linkedlist in the given array position
+                items[position] = linkedList;
+            }
+            //returning linked list.
+            return linkedList;
         }
     }
 }
