@@ -54,5 +54,63 @@ namespace HashTable
             //returning linked list.
             return linkedList;
         }
+         public void Add(K key, V value)//used add method and passes 2 parameter pushing the data into hashtable using linkedlist opraton
+        {
+            
+            int position = GetArrayPosition(key);
+        
+            LinkedList<keyValue<K, V>> linkedList = GetLinkedList(position);
+            //for adding value in linkedlist. Struct object is defined, like a class and key and value obtained as a parameter
+            //to this method are passed as parameter to object
+            //keyValue struct is instatiated and stores the key and value, which is passed as one object to linkedlist.
+            keyValue<K, V> item = new keyValue<K, V>() { Key = key, Value = value };
+            //keyvalue is added in the linkedlist.
+            linkedList.AddLast(item);
+        }
+
+
+
+        public void Remove(K key)//rempving particular entery  from hashtable
+        {
+            //getting the  position of linkedlist in which key value pair is stored and is to be removed
+            int position = GetArrayPosition(key);
+            //calling the dictionary from which element is to be removed.
+            LinkedList<keyValue<K, V>> linkedList = GetLinkedList(position);
+            bool itemFound = false;
+            //if key of item matches from iteration done in particular linked list, key value pairs are assigned to foundItem variable.
+            keyValue<K, V> foundItem = default(keyValue<K, V>);
+            //iterating loop in linkedlist to find out the key
+            foreach (keyValue<K, V> item in linkedList)
+            {
+                if (item.Key.Equals(key))
+                {
+                    itemFound = true;
+                    foundItem = item;
+                }
+            }
+            //if item is found, it is removed
+            if (itemFound)
+            {
+                linkedList.Remove(foundItem);
+            }
+        }
+
+        public void Display()
+        {
+            //linkedlist is iterated in array
+            foreach (var linkedList in items)
+            {
+                //linkedlist may be null, if hashcode never generated the positon of array
+                if (linkedList != null)
+
+                    //if linkedlist is not null, linkedlist is iterated
+
+                    foreach (keyValue<K, V> keyvalue in linkedList)
+                    {
+
+                        Console.WriteLine(keyvalue.Key + "\t" + keyvalue.Value);
+                    }
+            }
+        }
     }
 }
